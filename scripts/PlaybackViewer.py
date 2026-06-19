@@ -8,10 +8,13 @@ import cv2
 pipeline = rs.pipeline()
 config = rs.config()
 
+import os
+
 # 💡 ใส่ชื่อไฟล์ .bag ของคุณ
-#bag_file_path = "dataset_10sec.bag" 
-#bag_file_path = "first_round.bag" 
-bag_file_path = "sec.bag" 
+data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data')
+#bag_file_path = os.path.join(data_dir, "dataset_10sec.bag")
+#bag_file_path = os.path.join(data_dir, "first_round.bag")
+bag_file_path = os.path.join(data_dir, "sec.bag")
 
 rs.config.enable_device_from_file(config, bag_file_path, repeat_playback=True)
 

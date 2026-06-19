@@ -43,6 +43,9 @@ def record_realsense(filename="realsense_record.bag", duration=10):
         pipeline.stop()
         print(f"✅ บันทึกเสร็จสิ้น! ข้อมูลทั้งหมดถูกเซฟเรียบร้อย (บันทึกไป {frame_count} เฟรม)")
 
+import os
+
 if __name__ == "__main__":
     # เรียกใช้งานฟังก์ชัน: ระบุชื่อไฟล์และเวลา (วินาที) ที่ต้องการ
-    record_realsense("dataset_10sec.bag", 10)
+    data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data')
+    record_realsense(os.path.join(data_dir, "dataset_10sec.bag"), 10)
