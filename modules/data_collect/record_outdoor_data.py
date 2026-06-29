@@ -28,11 +28,16 @@ def main():
     config.enable_record_to_file(bag_path)
 
     # Configure streams: Color, Depth, and Infrared (Left/Right)
-    width, height, fps = 640, 480, 30
-    config.enable_stream(rs.stream.color, width, height, rs.format.bgr8, fps)
-    config.enable_stream(rs.stream.depth, width, height, rs.format.z16, fps)
-    config.enable_stream(rs.stream.infrared, 1, width, height, rs.format.y8, fps)
-    config.enable_stream(rs.stream.infrared, 2, width, height, rs.format.y8, fps)
+    # Note: Max resolution usually differs between color and depth sensors.
+    # 1920x1080 is typical max for Color. 1280x720 (or 1280x800) is typical max for Depth/IR.
+    color_width, color_height = 1920, 1080
+    depth_width, depth_height = 1280, 720
+    fps = 30
+
+    config.enable_stream(rs.stream.color, color_width, color_height, rs.format.bgr8, fps)
+    config.enable_stream(rs.stream.depth, depth_width, depth_height, rs.format.z16, fps)
+    config.enable_stream(rs.stream.infrared, 1, depth_width, depth_height, rs.format.y8, fps)
+    config.enable_stream(rs.stream.infrared, 2, depth_width, depth_height, rs.format.y8, fps)
 
     print(f"Initializing stream. Recording will be saved to: {bag_path}")
 
